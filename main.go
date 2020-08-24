@@ -15,11 +15,6 @@ type Task struct {
 	ID    int64  `json:"id"`
 }
 
-type result struct {
-	Name  string `json:"name"`
-	Count int    `json:"count"`
-}
-
 var taskList []Task
 
 func main() {
@@ -113,15 +108,5 @@ func deleteTask(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	// return all
-	json.NewEncoder(w).Encode(taskList)
-}
-
-func TaskHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		vars := mux.Vars(r)
-		title := vars["title"]
-		newTask := Task{Title: title, ID: 1}
-		taskList = append(taskList, newTask)
-	}
 	json.NewEncoder(w).Encode(taskList)
 }
