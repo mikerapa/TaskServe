@@ -65,10 +65,8 @@ func getTask(w http.ResponseWriter, r *http.Request) {
 func createTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var newTask Task
-	err := json.NewDecoder(r.Body).Decode(&newTask)
-	if err != nil {
+	_ = json.NewDecoder(r.Body).Decode(&newTask)
 
-	}
 	newTask.ID = rand.Int63n(999999)
 	taskList = append(taskList, newTask)
 	json.NewEncoder(w).Encode(newTask)
